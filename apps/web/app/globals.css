@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+}
+
+:root {
+  --background: #FDFBF7;
+  --foreground: #1C1917;
+
+  --card: #FFFFFF;
+  --card-foreground: #1C1917;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #1C1917;
+
+  --primary: #292524;
+  --primary-foreground: #F5F5F4;
+
+  --secondary: #E7E5E4;
+  --secondary-foreground: #1C1917;
+
+  --muted: #F5F5F4;
+  --muted-foreground: #78716C;
+
+  --accent: #F5F5F4;
+  --accent-foreground: #1C1917;
+
+  --destructive: #EF4444;
+  --destructive-foreground: #FEF2F2;
+
+  --border: #E7E5E4;
+  --input: #E7E5E4;
+  --ring: #292524;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 10px;
+}
+
+.tap-effect {
+  @apply active:scale-[0.97] transition-transform duration-150;
+}

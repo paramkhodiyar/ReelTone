@@ -1,0 +1,19 @@
+{
+  "name": "reeltone",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run web\" \"npm run api\"",
+    "web": "cd apps/web && npm run dev",
+    "api": "cd apps/api && PATH=\"$PATH:/opt/homebrew/bin:/opt/homebrew/opt/node@20/bin\" ./venv/bin/uvicorn server:app --reload --port 8000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "concurrently": "^9.2.1",
+    "tree": "^0.1.3"
+  }
+}
