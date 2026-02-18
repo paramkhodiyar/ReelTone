@@ -52,8 +52,8 @@ export default function DownloadPage() {
 
       router.push(`/trim?${params.toString()}`);
     } catch (error: any) {
-      console.error(error);
-      const message = error.response?.data?.error || "Could not fetch audio. Check the link or your connection.";
+      console.error("Download Error Details:", error);
+      const message = error.response?.data?.detail || error.response?.data?.error || "Could not fetch audio. Check the link.";
       toast.error(message, { id: toastId });
     } finally {
       setIsLoading(false);

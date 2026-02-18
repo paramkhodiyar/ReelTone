@@ -20,8 +20,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-DOWNLOAD_DIR = "../../downloads"
-RINGTONE_DIR = "../../ringtones"
+# Use paths relative to the current script location to avoid issues on hosting providers
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DOWNLOAD_DIR = os.path.join(BASE_DIR, "downloads")
+RINGTONE_DIR = os.path.join(BASE_DIR, "ringtones")
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 os.makedirs(RINGTONE_DIR, exist_ok=True)
 
@@ -63,7 +65,9 @@ async def download(data: dict):
         return {"file": f"{file_id}.mp3", "title": title}
     except Exception as e:
         print(f"Download error: {str(e)}")
-        return {"error": str(e)}, 500
+        # Raise proper HTTPException so Axios catches it in catch block
+        from fastapi import HTTPException
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/trim")
 async def trim(data: dict):

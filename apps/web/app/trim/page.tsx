@@ -36,8 +36,9 @@ function TrimContent() {
     }, [region, duration]);
 
     useEffect(() => {
-        if (!file) {
-            console.log("TrimPage: No file parameter found");
+        if (!file || file === "undefined" || file === "null") {
+            console.error("TrimPage: Invalid file parameter:", file);
+            toast.error("Invalid session. Please try downloading again.");
             router.push("/");
             return;
         }
