@@ -48,13 +48,14 @@ async def download(data: dict):
         "format": "bestaudio/best",
         "outtmpl": out_path,
         "noplaylist": True,
-        "quiet": True,
+        "quiet": False,
         "nocheckcertificate": True,
         "cookiefile": cookie_path if os.path.exists(cookie_path) else None,
-        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+        "referer": "https://www.youtube.com/",
         "extractor_args": {
             "youtube": {
-                "player_client": ["ios", "android", "mweb"],
+                "player_client": ["web", "mweb", "android"],
                 "player_skip": ["webpage", "configs"],
             }
         },
@@ -66,8 +67,8 @@ async def download(data: dict):
             }
         ],
         "concurrent_fragment_downloads": 5,
-        "socket_timeout": 20,
-        "retries": 3,
+        "socket_timeout": 30,
+        "retries": 5,
     }
 
     try:
