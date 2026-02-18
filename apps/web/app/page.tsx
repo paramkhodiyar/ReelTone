@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const API_URL = "http://localhost:8000";
+const API_URL = "https://reeltone.onrender.com";
 
 export default function DownloadPage() {
   const [url, setUrl] = useState("");
