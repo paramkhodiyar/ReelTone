@@ -41,6 +41,8 @@ async def download(data: dict):
     file_id = str(uuid.uuid4())
     out_path = f"{DOWNLOAD_DIR}/{file_id}"
     
+    cookie_path = os.path.join(BASE_DIR, "cookies.txt")
+    
     ydl_opts = {
         "format": "bestaudio/best",
         "outtmpl": out_path,
@@ -55,11 +57,13 @@ async def download(data: dict):
         "concurrent_fragment_downloads": 10,
         "socket_timeout": 30,
         "geo_bypass": True,
-        # Try to bypass bot detection
+        # Use cookies file if user has provided it
+        "cookiefile": cookie_path if os.path.exists(cookie_path) else None,
+        # Try to bypass bot detection by mimicking different devices
         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "extractor_args": {
             "youtube": {
-                "player_client": ["ios", "web"],
+                "player_client": ["tv", "web_embedded"],
                 "player_skip": ["webpage", "configs"],
             }
         }
