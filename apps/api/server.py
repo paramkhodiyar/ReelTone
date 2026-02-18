@@ -43,21 +43,28 @@ async def download(data: dict):
     
     cookie_path = os.path.join(BASE_DIR, "cookies.txt")
     
-    ydl_opts = {
-    "format": "bestaudio",
-    "outtmpl": out_path,
-    "noplaylist": True,
-    "quiet": True,
-    "nocheckcertificate": True,
-    "postprocessors": [
-        {
-            "key": "FFmpegExtractAudio",
-            "preferredcodec": "mp3",
-            "preferredquality": "128",
-        }
-    ],
-}
 
+    ydl_opts = {
+        "format": "bestaudio",
+        "outtmpl": out_path,
+        "noplaylist": True,
+        "quiet": True,
+        "nocheckcertificate": True,
+        "cookiefile": cookie_path if os.path.exists(cookie_path) else None,
+        "extractor_args": {
+            "youtube": {
+                "player_client": ["web"]
+            }
+        },
+
+        "postprocessors": [
+            {
+                "key": "FFmpegExtractAudio",
+                "preferredcodec": "mp3",
+                "preferredquality": "128",
+            }
+        ],
+    }
 
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
