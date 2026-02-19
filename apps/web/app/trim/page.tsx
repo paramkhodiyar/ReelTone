@@ -8,7 +8,7 @@ import WaveSurfer from "wavesurfer.js";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const API_URL = "https://reeltone.onrender.com";
+const API_URL = "https://nonmoderately-nonfermented-dave.ngrok-free.dev";
 
 function TrimContent() {
     const searchParams = useSearchParams();
