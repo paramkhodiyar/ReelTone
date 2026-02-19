@@ -20,7 +20,9 @@ export default function LibraryPage() {
 
     const fetchLibrary = async () => {
         try {
-            const response = await axios.get(`${API_URL}/library`);
+            const response = await axios.get(`${API_URL}/library`, {
+                headers: { "ngrok-skip-browser-warning": "any" }
+            });
             setRingtones(response.data.files);
         } catch (error) {
             console.error(error);

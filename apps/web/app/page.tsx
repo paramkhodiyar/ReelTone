@@ -36,7 +36,8 @@ export default function DownloadPage() {
 
     try {
       const response = await axios.post(`${API_URL}/download`, { url }, {
-        timeout: 60000 // 1 minute timeout
+        timeout: 60000, // 1 minute timeout
+        headers: { "ngrok-skip-browser-warning": "any" }
       });
 
       if (response.data.error) {

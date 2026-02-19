@@ -61,6 +61,9 @@ function TrimContent() {
                 barRadius: 10,
                 height: 100,
                 url: `${API_URL}/files/${file}`,
+                fetchParams: {
+                    headers: { "ngrok-skip-browser-warning": "any" }
+                }
             });
 
             // Fallback timeout in case 'ready' event doesn't fire
@@ -153,6 +156,8 @@ function TrimContent() {
                 title,
                 start: Number(region.start) || 0,
                 end: Number(region.end) || duration || 30,
+            }, {
+                headers: { "ngrok-skip-browser-warning": "any" }
             });
             toast.success("Ringtone saved to library!", { id: toastId });
             router.push("/library");
