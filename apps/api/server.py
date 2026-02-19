@@ -46,16 +46,20 @@ async def download(data: dict):
 
     ydl_opts = {
         "format": "bestaudio/best",
-        "outtmpl": out_path,
+        "outtmpl": f"{out_path}.%(ext)s",
         "noplaylist": True,
         "quiet": False,
         "nocheckcertificate": True,
         "cookiefile": cookie_path if os.path.exists(cookie_path) else None,
         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
-        "referer": "https://www.youtube.com/",
+        "http_headers": {
+            "Referer": "https://www.youtube.com/",
+            "Accept-Language": "en-US,en;q=0.9",
+        },
         "extractor_args": {
             "youtube": {
-                "player_client": ["web", "mweb", "android"],
+                # Documentation fix: Use mobile clients first as they are less restricted than 'web'
+                "player_client": ["android", "ios", "mweb", "web"],
                 "player_skip": ["webpage", "configs"],
             }
         },
@@ -66,9 +70,12 @@ async def download(data: dict):
                 "preferredquality": "128",
             }
         ],
+        # Documentation fix: Throttling occurs if chunk size > 10MB
+        "http_chunk_size": 10485760,
         "concurrent_fragment_downloads": 5,
         "socket_timeout": 30,
-        "retries": 5,
+        "retries": 10,
+        "postprocessor_args": ["-strict", "-2"],
     }
 
     try:
